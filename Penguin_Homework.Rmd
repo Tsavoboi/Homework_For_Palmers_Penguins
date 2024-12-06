@@ -19,7 +19,6 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE) #This code sets warning 
 First for this homework I installed and loaded the packages required, the installation was done in the console for cleaner code.
 
 ```{r loading.the.packages}
-####Uhhhhhh
 #The library function is used to load the packages important for this analysis. 
 library(tidyverse)
 library(palmerpenguins) #This includes our data  set. 
@@ -85,7 +84,7 @@ head(penguins_raw) #This is my raw data set.
 #The first step in my analysis is cleaning the data. 
 penguins_original <- penguins_raw
 colnames(penguins_raw) #these column names need cleaning, there are gaps, and sporadic capitalisation. 
-write.csv (penguins_raw, here("data","penguins_raw.csv")) #This saves the data to a data folder in the same project as this Rmd file. 
+write.csv (penguins_raw, here("penguins_raw.csv")) #This saves the data set to the same location as whereever this Rmd file is. I has it directed to a data folder within my R project, but I changed that as it would not allow the code to be run without makeing a specific data folder. 
 #The piping below removes the comments and Delta columns, cleans the data, removing capitals, full stops, brackets, removing N/A readings and renaming the species columns. 
 penguins_clean <- penguins_raw %>% 
               select(-Comments) %>% 
@@ -95,7 +94,7 @@ penguins_clean <- penguins_raw %>%
               mutate(species = case_when( species == "Adelie Penguin (Pygoscelis adeliae)" ~ "Adelie (P. adeliae)",
                               species == "Chinstrap penguin (Pygoscelis antarctica)" ~ "Chinstrap (P. antarctica)",
                               species == "Gentoo penguin (Pygoscelis papua)" ~ "Gentoo (P. papua)"))
-write.csv (penguins_clean, here("data","penguins_raw.csv"))
+write.csv (penguins_clean, here("penguins_clean.csv"))
 
 ```
 
@@ -110,7 +109,7 @@ Fig.1 <- ggplot(data = penguins_clean, aes(group = species,x = body_mass_g, y = 
 
 
 #The code below saved the figure to my project file for this project, as a png. 
-png(filename="C:/Reproducible_figures/Figures/Flipper_and_body_mass.png")
+png(filename="C:/Reproducible_figures/Figures/Flipper_and_body_mass.png") #This code saves the file as a png on my computer, the file route will have to be changed to run it on another computer, to your own figure file. 
 plot(Fig.1)
 dev.off()
 
@@ -152,7 +151,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 #The code below runs an ANOVA test on the linear model made above, and then saves the results table as a png. 
 #I have generated the ANOVA table for completeness, but to tidy it up I have generated a table in the document as well. 
 Table.2 <- anova(effect.of.body.mass.on.flipper.length)
-png(filename="C:/Reproducible_figures/Figures/ANOVA_for_Flipper_and_body_mass.png")
+png(filename="C:/Reproducible_figures/Figures/ANOVA_for_Flipper_and_body_mass.png") #Again this only works if you have this exact file route, to save the png to your own pc the file routing will have to be changed. 
 plot(Table.2)
 dev.off()
 Table.2
