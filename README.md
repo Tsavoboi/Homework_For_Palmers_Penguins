@@ -1,0 +1,1 @@
+Hello, I have attached an R project here, as well as the Rmd file containing my code for question 2 for the Reproducible figures homework assignment. There is also a renv lockfile which can help to make sure the right packages loaded for this project. 
