@@ -157,7 +157,7 @@ Table.2
 ```
 
 |           | Degrees of Freedom | Sum of squares | Mean squares | F value |   P value   |
-|:---------:|:------------------:|:--------------:|:------------:|:-------:|:-----------:|
+|:----------:|:----------:|:----------:|:----------:|:----------:|:----------:|
 | Body Mass |         1          |     49703      |    49703     | 1060.3  | 2.2x10^-16^ |
 | Residuals |        331         |     15516      |      47      |         |             |
 
@@ -196,6 +196,8 @@ In conclusion, this study investigated the possible correlation between body mas
 #### a) My GitHub.
 
 GitHub link:
+
+[My Git Hub Repository](https://github.com/Tsavoboi/Homework_For_Palmers_Penguins)
 
 #### b) Partner's Github.
 
