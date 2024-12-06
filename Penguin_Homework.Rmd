@@ -19,7 +19,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE) #This code sets warning 
 First for this homework I installed and loaded the packages required, the installation was done in the console for cleaner code.
 
 ```{r loading.the.packages}
-
+####Uhhhhhh
 #The library function is used to load the packages important for this analysis. 
 library(tidyverse)
 library(palmerpenguins) #This includes our data  set. 
@@ -32,6 +32,7 @@ library(renv) #the renv:: commands below were run in the console when they were 
 #renv::init()
 #renv::snapshot()
 #renv::restore ()
+#please when attempting to run this code start with renv::restore in the console to ensure the required packages are loaded. 
 ```
 
 ### Making a poor graph.
