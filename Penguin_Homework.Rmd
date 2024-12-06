@@ -1,0 +1,207 @@
+---
+title: "Homework for Palmer's penguins"
+format:
+
+    html:
+
+       embed-resources: true
+date: "2024-11-27"
+---
+
+```{r}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) #This code sets warning and messages to not display, increasing the flow of my results, and decreasing clutter.
+```
+
+# Homework
+
+## Question 1: Data Visualisation for Science Communication
+
+First for this homework I installed and loaded the packages required, the installation was done in the console for cleaner code.
+
+```{r loading.the.packages}
+
+#The library function is used to load the packages important for this analysis. 
+library(tidyverse)
+library(palmerpenguins) #This includes our data  set. 
+library(janitor)
+library(here)
+library(ggplot2)
+library(tinytex)
+library(lmtest)
+library(renv) #the renv:: commands below were run in the console when they were needed.The renv package saves a record of the packages this study uses, and the version of those packages, to increase the reproducibility of my results.  
+#renv::init()
+#renv::snapshot()
+#renv::restore ()
+```
+
+### Making a poor graph.
+
+Question one required a plot which poorly expressed the data. I have used the raw data set for this figure (although I clean the data for the next question). The package ggplot2 has been used to make this figure. For my poorly made figure I have chosen to visualise the distribution of different penguin species over different islands, using a bar-plot.
+
+```{r Making.A.Bad.Graph}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+#The head function is used to show me the first few lines of the dataset, which allowed me to find specific columns of data to represent graphically. 
+head(penguins_raw)
+#ggplot() is used to plot the graph. geom_bar() tells the code a bar-graph is required, within this function, width changes the width of the bars, and colour changes the outline.  
+#The theme() function added italic blue figure legends
+#The scale_y_continuous() function changed the scale, providing scale lines from 120 to 320, at 10 increment intervals. 
+Plot <- ggplot(data = penguins_raw, aes(x = Island)) + geom_bar((aes(color=Species)), width = 0.1)+ labs(x = "Island", y = "Count") + 
+  theme(axis.title = element_text(size = 8,
+                                  color = "blue",
+                                  face = "italic")) + scale_y_continuous(breaks = seq(120, 320, by = 10))+ coord_cartesian(ylim = c(0, 500), xlim = c(0,5)) + theme(axis.line = element_line(color = "red", linewidth = 1.5,linetype = 2))
+```
+
+#### a) Provide your figure here:
+
+```{r The.Bad.Graph, fig.width=8, fig.height=6}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+Plot
+```
+
+#### b) Write about how your design choices mislead the reader about the underlying data (200-300 words).
+
+My design choices make the graph very difficult to interpret. The colour scheme is not colour blind friendly, using red, blue and green, and the choice to represent different species via different colour outlines, as opposed to different fill colours makes it difficult to interpret which penguins are found on which islands. A much better way of representing this would be to use different patterns within the bars. Furthermore, by changing the Y axis scale I make it seem that there is less of a difference between the number of penguins on each island (by stretching the y axis up the perceived difference between each island's total species count decreases). The use of a Y scale starting at 120 is also misleading as it allows no numerical data to be elucidated for much of the graph, preventing any comparative information from being extracted. Moreover, the use of italic, small margins, and no title, make understanding the information the graph is trying to convey difficult to ascertain. Lastly, decreasing the widths of each bar, and increasing the length of the y axis, and outlining the entire graph in a broken red line makes the bars even more difficult to interpret successfully.
+
+## Question 2: Data pipeline.
+
+### Introduction and hypothesis.
+
+This question requires me to load, clean, graphically explore, and then statistically test the data in the Palmer's penguin data set. The first part of this is loading the data, which is shown below.
+
+The question I am exploring is whether Body mass and flipper length are correlated. My alternative hypothesis is that flipper length and body mass are correlated, as I believe body mass may be an accurate proxy for overall body size, and I expect the penguins to increase proportionally, so as the penguin gets bigger, its flippers should get longer. The null hypothesis is that flipper size is not correlated with body mass, possibly because flippers are evolutionary constrained within morphospace, and cannot continue growing with the rest of the body, or possibly after some amount of growth any other increase in body mass is placed in specific tissues, such as fat deposits, and doesn't correspond to a proportional increase in body dimensions.
+
+I have chosen to investigate whether there is a correlation between body mass and flipper length, as if there is a strong correlation, then possibly a model could be made to predict body mass from flipper length, which is likely an easier measure to take in the field, which would enhance data collection, and conservation methods by streamlining body mass estimates.
+
+### Cleaning the data.
+
+The data in the Palmer's penguin data-set is badly formatted for the analysis I would like to carry out, so the first step is cleaning the data. This will make analysis possible as I progress with this study. I have also saved the raw and clean data into a data folder.
+
+```{r Cleaning.the.data}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+#I need for this assignment to load ggplot2, tidyverse, Palmer's penguins and janitor. These are loaded in the beginning of this project, so I haven't reloaded them here. 
+#The data I am exploring is in the Palmer's penguins package.
+head(penguins_raw) #This is my raw data set. 
+#The first step in my analysis is cleaning the data. 
+penguins_original <- penguins_raw
+colnames(penguins_raw) #these column names need cleaning, there are gaps, and sporadic capitalisation. 
+write.csv (penguins_raw, here("data","penguins_raw.csv")) #This saves the data to a data folder in the same project as this Rmd file. 
+#The piping below removes the comments and Delta columns, cleans the data, removing capitals, full stops, brackets, removing N/A readings and renaming the species columns. 
+penguins_clean <- penguins_raw %>% 
+              select(-Comments) %>% 
+              select(-starts_with("Delta")) %>% 
+              clean_names() %>% 
+              na.omit() %>% 
+              mutate(species = case_when( species == "Adelie Penguin (Pygoscelis adeliae)" ~ "Adelie (P. adeliae)",
+                              species == "Chinstrap penguin (Pygoscelis antarctica)" ~ "Chinstrap (P. antarctica)",
+                              species == "Gentoo penguin (Pygoscelis papua)" ~ "Gentoo (P. papua)"))
+write.csv (penguins_clean, here("data","penguins_raw.csv"))
+
+```
+
+### Creating an exploratory figure for the data.
+
+Now I will make an exploratory figure with my clean data. This will give me an idea of the relationship between flipper length and body mass, in a species specific capacity. I have grouped the penguins by species, as there may be a difference in the relationship between penguin flipper length and body mass in different species.
+
+```{r Creating.an.exploratory.figure}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+#I have used ggplot2 for this figure, adding a line graph with geom_line, the raw data points with geom_jitter, and a linear regression using the geom_smooth function. Furthermore, I have grouped the data by species. 
+Fig.1 <- ggplot(data = penguins_clean, aes(group = species,x = body_mass_g, y = flipper_length_mm, color = species)) + geom_line() + theme_bw() + labs(x = 'Body Mass (g)', y = 'Flipper Length (mm)', title ='Does body mass correlate with flipper length?') + geom_jitter(position = position_jitter(0.5), color = "black", size = 0.5, alpha = 0.9, pch = 21) + geom_smooth(method=lm)
+
+
+#The code below saved the figure to my project file for this project, as a png. 
+png(filename="C:/Reproducible_figures/Figures/Flipper_and_body_mass.png")
+plot(Fig.1)
+dev.off()
+
+Fig.1
+```
+
+###### Fig.1. A graph showing the relationship between body mass and flipper length in three species of penguins. This graph shows a possible positive correlation in all species, with a stronger correlation within the Chinstrap penguins.
+
+### Statistical Methods.
+
+Having shown that there is likely a positive correlation between body mass and flipper length in Fig.1, I will now try to show this using statistical tests. I will run a statistical test on this work to prove there is a correlation, and that body mass explains the variation within flipper length across the three penguin species. I am going to use the lmtest() package for this. This will fit a simple linear model to the data.
+
+```{r fitting.a.linear.model.to.the.data}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+#First I must fit a linear model of the effect of body mass on flipper length. 
+effect.of.body.mass.on.flipper.length <- lm(flipper_length_mm ~ body_mass_g, data = penguins_clean)
+Table.1 <- summary(effect.of.body.mass.on.flipper.length)
+Table.1 
+```
+
+###### Table.1. shows the simple linear model between body mass and flipper length.
+
+```{r}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+par(mfrow=c(2,2))
+#The plot below shows the linear model residual plots and QQ plots, and shows that the ANOVA assumptions are met.
+Fig.2 <- plot(effect.of.body.mass.on.flipper.length)
+Fig.2
+```
+
+###### Fig.2. Shows the Residuals vs Fitted plot, the Q-Q plot, the stanardised residuals plot, and the residuals vs leverage plot.
+
+Fig. 2 shows that there is low hetroskedascity, as the lines are flat on both the residuals vs fitted values chart (top left), and in the standardised residual plot (bottom left). The Q-Q plot also demonstrates that the data is approximately normal, as the points fall close to the diagonal line. This suggests that the linear model is a good fit, and that the model explains a large proportion of the variation within flipper length.
+
+Having established that the assumptions of the ANOVA test are met, we can run an ANOVA using the lmtest(package).
+
+```{r running.an.anova}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+#The code below runs an ANOVA test on the linear model made above, and then saves the results table as a png. 
+#I have generated the ANOVA table for completeness, but to tidy it up I have generated a table in the document as well. 
+Table.2 <- anova(effect.of.body.mass.on.flipper.length)
+png(filename="C:/Reproducible_figures/Figures/ANOVA_for_Flipper_and_body_mass.png")
+plot(Table.2)
+dev.off()
+Table.2
+```
+
+|           | Degrees of Freedom | Sum of squares | Mean squares | F value |   P value   |
+|:---------:|:------------------:|:--------------:|:------------:|:-------:|:-----------:|
+| Body Mass |         1          |     49703      |    49703     | 1060.3  | 2.2x10^-16^ |
+| Residuals |        331         |     15516      |      47      |         |             |
+
+###### Table.2. Shows the ANOVA table for the effect of body mass on flipper length, and is my results figure, illustrating the ANOVA test used, and its product.
+
+As Table.2 demonstrates there is a strong correlation between body mass and flipper length, with a statistically significant correlation between body mass and flipper length (p= 2.2x10^-16^, ANOVA). However, this is a correlation across three different species, so it is important to check if species has an effect, and that the species and body mass effect do not interact strongly. For this we need an ANCOVA, which is shown below.
+
+```{r running.an.ANCOVA}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+#What about an ANCOVA? The code below investigates the interaction between body mass and species on flipper length. 
+effect.of.body.mass.and.species <- lm(flipper_length_mm ~ body_mass_g*species, data = penguins_clean)
+#summary(effect.of.body.mass.and.species). (I used this to check the summary of the linear model, but for the sake of the assignment I am not including it as working code.)
+Table.3 <- anova(effect.of.body.mass.and.species)
+png(filename ="C:/Reproducible_figures/Figures/ANCOVA_for_Flipper_and_body_mass_and_species.png")
+plot(Table.3)
+dev.off()
+Table.3
+```
+
+###### Table.3. Shows the ANCOVA table for flipper length, body mass, and species interactions.
+
+As Table.3 shows, there is a very weak interaction between species and body mass on flipper length, however, species has a very strong effect on flipper length, and body mass has a very strong effect on flipper length, which makes sense, as we would expect flipper length to vary between species, due to different average species sizes, and as my original hypothesis argued, we'd expect flipper length to correlate with body mass as well.
+
+### Results and Discussion.
+
+This study showed that there is a statistically significant correlation between body mass and flipper length in the three species of penguins (Adelie, Gentoo, and Chinstrap) in the Palmer's penguin data set (p= 2.2x10^-16^, ANOVA). Furthermore, this study illustrated that there is a strong effect of species on flipper length, but species and body mass do not strongly interact (p=0.01478, ANCOVA), whilst this is a significant result, it is less strong than the other effects, this shows that there is some level of species specific correlation between body mass and flipper length, which we would expect from the exploratory plot in Fig.1.
+
+This result could be used to form a mathematical model estimate penguin mass from flipper length, which could be useful in the field in species which are difficult to weigh (for example in Emperor penguins, which are large enough to require incredibly bulky weighing equipment, with limited portability). If a model could be established for quickly recording an estimate of body mass it could have conservation implications (such as getting a general indication of the health of a population), however, a problem with using flipper length as a proxy for body mass is that there is a non-negligible amount of variability within the correlation as shown in Fig.1. Future research could focus on studying more penguin species to confirm that this is a trend seen across species, as well as investigating whether the relationship between body mass and flipper length is general, or strongly species specific, which this study touched upon, however, a larger species pool would be beneficial for that.
+
+### Conclusion.
+
+In conclusion, this study investigated the possible correlation between body mass and flipper length across three species of penguin found in the Palmer's penguin data set, finding that there is a strong correlation between body mass and flipper length, and a strong correlation between species and flipper length. This study also found that there was a weaker, but still statistically significant, interaction between the effect of body mass on flipper length and the species of penguin, suggesting that there may be species specific trends. This study formed and analysed a linear model using the lmtest() package.
+
+## Question 3: Open Science.
+
+#### a) My GitHub.
+
+GitHub link:
+
+#### b) Partner's Github.
+
+Partner's GitHub link:
+
+#### c) Reflection on my partner's code.
+
+#### d) Reflection on my own code after feedback from my partner.
