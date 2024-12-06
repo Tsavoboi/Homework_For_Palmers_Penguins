@@ -82,9 +82,8 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 #The data I am exploring is in the Palmer's penguins package.
 head(penguins_raw) #This is my raw data set. 
 #The first step in my analysis is cleaning the data. 
-penguins_original <- penguins_raw
 colnames(penguins_raw) #these column names need cleaning, there are gaps, and sporadic capitalisation. 
-write.csv (penguins_raw, here("penguins_raw.csv")) #This saves the data set to the same location as whereever this Rmd file is. I has it directed to a data folder within my R project, but I changed that as it would not allow the code to be run without makeing a specific data folder. 
+write.csv (penguins_raw, here("data","penguins_raw.csv")) #This saves the data to a file called data, saved in the same R project as this rmd file. If re-running this code, a file named data will be necessary in the same working directory.  
 #The piping below removes the comments and Delta columns, cleans the data, removing capitals, full stops, brackets, removing N/A readings and renaming the species columns. 
 penguins_clean <- penguins_raw %>% 
               select(-Comments) %>% 
@@ -94,7 +93,7 @@ penguins_clean <- penguins_raw %>%
               mutate(species = case_when( species == "Adelie Penguin (Pygoscelis adeliae)" ~ "Adelie (P. adeliae)",
                               species == "Chinstrap penguin (Pygoscelis antarctica)" ~ "Chinstrap (P. antarctica)",
                               species == "Gentoo penguin (Pygoscelis papua)" ~ "Gentoo (P. papua)"))
-write.csv (penguins_clean, here("penguins_clean.csv"))
+write.csv (penguins_clean, here("data","penguins_clean.csv"))
 
 ```
 
