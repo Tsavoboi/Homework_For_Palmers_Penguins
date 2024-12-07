@@ -132,7 +132,7 @@ Table.1
 
 ###### Table.1. shows the simple linear model between body mass and flipper length.
 
-```{r}
+```{r checking.the.assumptions.of.the.ANOVA}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
 par(mfrow=c(2,2))
 #The plot below shows the linear model residual plots and QQ plots, and shows that the ANOVA assumptions are met.
