@@ -14,7 +14,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE) #This code sets warning 
 
 # Homework
 
-## Question 1: Data Visualisation for Scienceren Communication
+## Question 1: Data Visualisation for Science Communication
 
 First for this homework I installed and loaded the packages required, the installation was done in the console for cleaner code, the packages needed are shown below, and stored in the renv file for this coding assignment.
 
