@@ -12,7 +12,7 @@ date: "2024-11-27"
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) #This code sets warning and messages to not display, increasing the flow of my results, and decreasing clutter.
 ```
 
-# Homework
+# Homework 
 
 ## Question 1: Data Visualisation for Science Communication
 
