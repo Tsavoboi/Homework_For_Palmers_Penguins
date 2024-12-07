@@ -116,7 +116,7 @@ dev.off()
 Fig.1
 ```
 
-###### Fig.1. A graph showing the relationship between body mass and flipper length in three species of penguins. This graph shows a possible positive correlation in all species, with a stronger correlation within the Chinstrap penguins.
+###### Fig.1. A graph showing the relationship between body mass and flipper length in three species of penguins. This graph shows a possible positive correlation in all species.
 
 ### Statistical Methods.
 
@@ -137,10 +137,8 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 par(mfrow=c(2,2))
 #The plot below shows the linear model residual plots and QQ plots, and shows that the ANOVA assumptions are met.
 Fig.2 <- plot(effect.of.body.mass.on.flipper.length)
-png(filename="C:/Reproducible_figures/Figures/Residuals.png")
-plot(Fig.2)
-dev.off()
 Fig.2
+
 ```
 
 ###### Fig.2. Shows the Residuals vs Fitted plot, the Q-Q plot, the stanardised residuals plot, and the residuals vs leverage plot.
@@ -184,7 +182,7 @@ Table.3
 
 ###### Table.3. Shows the ANCOVA table for flipper length, body mass, and species interactions.
 
-As Table.3 shows, there is a very weak interaction between species and body mass on flipper length, however, species has a very strong effect on flipper length, and body mass has a very strong effect on flipper length, which makes sense, as we would expect flipper length to vary between species, due to different average species sizes, and as my original hypothesis argued, we'd expect flipper length to correlate with body mass as well.
+As Table.3 shows, there is a weak interaction between species and body mass on flipper length (suggesting the correlation between flipper length and body mass does vary between species), however, species has a very strong effect on flipper length, and body mass has a very strong effect on flipper length, which makes sense, as we would expect flipper length to vary between species, due to different average species sizes, and as my original hypothesis argued, we'd expect flipper length to correlate with body mass as well.
 
 ### Results and Discussion.
 
