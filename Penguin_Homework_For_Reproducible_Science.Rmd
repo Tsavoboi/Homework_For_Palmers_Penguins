@@ -186,9 +186,9 @@ As Table.3 shows, there is a weak interaction between species and body mass on f
 
 ### Results and Discussion.
 
-This study showed that there is a statistically significant correlation between body mass and flipper length in the three species of penguins (Adelie, Gentoo, and Chinstrap) in the Palmer's penguin data set (p= 2.2x10^-16^, ANOVA). Furthermore, this study illustrated that there is a strong effect of species on flipper length, but species and body mass do not strongly interact (p=0.01478, ANCOVA), whilst this is a significant result, it is less strong than the other effects, this shows that there is some level of species specific correlation between body mass and flipper length, which we would expect from the exploratory plot in Fig.1.
+This study showed that there is a statistically significant correlation between body mass and flipper length in the three species of penguins (Adelie, Gentoo, and Chinstrap) in the Palmer's penguin data set (p= 2.2x10^-16^, ANOVA). Furthermore, this study illustrated that there is a strong effect of species on flipper length, but species and body mass do not strongly interact (p= 0.01478, ANCOVA), whilst this is a significant result, it is less strong than the other effects, this shows that there is some level of species specific correlation between body mass and flipper length, which we would expect from the exploratory plot in Fig.1, and from different physiologies within different species of penguins. 
 
-This result could be used to form a mathematical model estimate penguin mass from flipper length, which could be useful in the field in species which are difficult to weigh (for example in Emperor penguins, which are large enough to require incredibly bulky weighing equipment, with limited portability). If a model could be established for quickly recording an estimate of body mass it could have conservation implications (such as getting a general indication of the health of a population), however, a problem with using flipper length as a proxy for body mass is that there is a non-negligible amount of variability within the correlation as shown in Fig.1. Future research could focus on studying more penguin species to confirm that this is a trend seen across species, as well as investigating whether the relationship between body mass and flipper length is general, or strongly species specific, which this study touched upon, however, a larger species pool would be beneficial for that.
+This result could be used to form a mathematical model estimate penguin mass from flipper length, which could be useful in the field in species which are difficult to weigh (for example in Emperor penguins, which are large enough to require incredibly bulky weighing equipment, with limited portability). If a model could be established for quickly recording an estimate of body mass it could have conservation implications (such as getting a general indication of the health of a population), however, a problem with using flipper length as a proxy for body mass is that there is a non-negligible amount of variability within the correlation as shown in Fig.1. Future research could focus on studying more penguin species to confirm that this is a trend seen across species (as the species studied in this analysis are all in the same genus, and are fairly closely related), as well as investigating whether the relationship between body mass and flipper length is general, or strongly species specific, which this study touched upon, however, a larger species pool would be beneficial for that.
 
 ### Conclusion.
 
@@ -201,7 +201,6 @@ In conclusion, this study investigated the possible correlation between body mas
 [Sun, Y., Li, M., Song, G. et al. The role of climate factors in geographic variation in body mass and wing length in a passerine bird. *Avian Res* 8, 1 (2017).](https://doi.org/10.1186/s40657-016-0059-9)
 
 
-
 ## Question 3: Open Science.
 
 #### a) My GitHub.
@@ -210,7 +209,7 @@ GitHub link: [My Git Hub Repository](https://github.com/Tsavoboi/Homework_For_Pa
 
 #### b) Partner's Github.
 
-Partner's GitHub link:
+Partner's GitHub link: 
 
 #### c) Reflection on my partner's code.
 
