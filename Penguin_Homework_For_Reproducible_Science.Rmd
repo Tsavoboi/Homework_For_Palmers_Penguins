@@ -12,13 +12,13 @@ date: "2024-11-27"
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) #This code sets warning and messages to not display, increasing the flow of my results, and decreasing clutter.
 ```
 
-# Homework 
+# Homework
 
 ## Question 1: Data Visualisation for Science Communication
 
 First for this homework I installed and loaded the packages required, the installation was done in the console for cleaner code, the packages needed are shown below, and stored in the renv file for this coding assignment.
 
-```{r loading.the.packages}
+```{r Loading.the.packages}
 
 #The library function is used to load the packages important for this analysis. 
 library(tidyverse)
@@ -60,7 +60,7 @@ Plot
 
 #### b) Write about how your design choices mislead the reader about the underlying data (200-300 words).
 
-My design choices make the graph very difficult to interpret. The colour scheme is not colour blind friendly, using red, blue and green, and the choice to represent different species via different colour outlines, as opposed to different fill colours makes it difficult to interpret which penguins are found on which islands. A much better way of representing this would be to use different patterns within the bars. Furthermore, by changing the Y axis scale I make it seem that there is less of a difference between the number of penguins on each island (by stretching the y axis up the perceived difference between each island's total species count decreases). The use of a Y scale starting at 120 is also misleading as it allows no numerical data to be elucidated for much of the graph, preventing any comparative information from being extracted. Moreover, the use of italic, small margins, and no title, make understanding the information the graph is trying to convey difficult to ascertain. Lastly, decreasing the widths of each bar, and increasing the length of the y axis, and outlining the entire graph in a broken red line makes the bars even more difficult to interpret successfully. 
+My design choices make the graph very difficult to interpret. The colour scheme is not colour blind friendly, using red, blue and green, and the choice to represent different species via different colour outlines, as opposed to different fill colours makes it difficult to interpret which penguins are found on which islands. A much better way of representing this would be to use different patterns within the bars. Furthermore, by changing the Y axis scale I make it seem that there is less of a difference between the number of penguins on each island (by stretching the y axis up the perceived difference between each island's total species count decreases). The use of a Y scale starting at 120 is also misleading as it allows no numerical data to be elucidated for much of the graph, preventing any comparative information from being extracted. Moreover, the use of italic, small margins, and no title, make understanding the information the graph is trying to convey difficult to ascertain. Lastly, decreasing the widths of each bar, and increasing the length of the y axis, and outlining the entire graph in a broken red line makes the bars even more difficult to interpret successfully.
 
 ## Question 2: Data pipeline.
 
@@ -68,7 +68,7 @@ My design choices make the graph very difficult to interpret. The colour scheme 
 
 This question requires me to load, clean, graphically explore, and then statistically test the data in the Palmer's penguin data set. The first part of this is loading the data, which is shown below.
 
-The question I am exploring is whether Body mass and flipper length are correlated (and whether species has any effect on this correlation). My alternative hypothesis is that flipper length and body mass are correlated, as I believe body mass may be an accurate proxy for overall body size, and I expect the penguins to increase proportionally, so as the penguin gets bigger, its flippers should get longer. The null hypothesis is that flipper size is not correlated with body mass, possibly because flippers are evolutionary constrained within morphospace, and cannot continue growing with the rest of the body, or possibly after some amount of growth any other increase in body mass is placed in specific tissues, such as fat deposits, and doesn't correspond to a proportional increase in body dimensions. There is also likely to be species specific differences in this correlation, due to different ecologies and life history traits. 
+The question I am exploring is whether Body mass and flipper length are correlated (and whether species has any effect on this correlation). My alternative hypothesis is that flipper length and body mass are correlated, as I believe body mass may be an accurate proxy for overall body size, and I expect the penguins to increase proportionally, so as the penguin gets bigger, its flippers should get longer. The null hypothesis is that flipper size is not correlated with body mass, possibly because flippers are evolutionary constrained within morphospace, and cannot continue growing with the rest of the body, or possibly after some amount of growth any other increase in body mass is placed in specific tissues, such as fat deposits, and doesn't correspond to a proportional increase in body dimensions. There is also likely to be species specific differences in this correlation, due to different ecologies and life history traits.
 
 I have chosen to investigate whether there is a correlation between body mass and flipper length, as if there is a strong correlation, then possibly a model could be made to predict body mass from flipper length, which is likely an easier measure to take in the field, which would enhance data collection, and conservation methods by streamlining body mass estimates. Both wing length (in our case flippers) and body mass are used as proxies for body size (Sun et al., 2017), and the estimation of body size is probably one of the most important trait influencing the ecology and physiology of animals (Kingsolver and Huey, 2008), therefore, understanding how body size and flipper length correlate with one another could be a highly useful within the further study of the three penguin species included within the Palmer's penguin data set.The Palmer's penguin data set focuses on three species of penguin, Adelie, Chinstrap and Gentoo penguins (*Pygoscelis adeliae, P. antarctica,* and *P. papua* respectively.)
 
@@ -82,15 +82,14 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 #The data I am exploring is in the Palmer's penguins package.
 head(penguins_raw) #This is my raw data set. 
 #The first step in my analysis is cleaning the data. 
-penguins_original <- penguins_raw
 colnames(penguins_raw) #these column names need cleaning, there are gaps, and sporadic capitalisation. 
-write.csv (penguins_raw, here("data","penguins_raw.csv")) #This saves the data to a data folder in the same project as this Rmd file. 
+write.csv (penguins_raw, here("data","penguins_raw.csv")) #This saves the data to a data folder in the same project as this .Rmd file. 
 #The piping below removes the comments and Delta columns, cleans the data, removing capitals, full stops, brackets, removing N/A readings and renaming the species columns. 
 penguins_clean <- penguins_raw %>% 
               select(-Comments) %>% 
               select(-starts_with("Delta")) %>% 
               clean_names() %>% 
-              na.omit() %>% 
+              na.omit()%>% 
               mutate(species = case_when( species == "Adelie Penguin (Pygoscelis adeliae)" ~ "Adelie (P. adeliae)",
                               species == "Chinstrap penguin (Pygoscelis antarctica)" ~ "Chinstrap (P. antarctica)",
                               species == "Gentoo penguin (Pygoscelis papua)" ~ "Gentoo (P. papua)"))
@@ -122,7 +121,7 @@ Fig.1
 
 Having shown that there is likely a positive correlation between body mass and flipper length in Fig.1, I will now try to show this using statistical tests. I will run a statistical test on this work to prove there is a correlation, and that body mass explains the variation within flipper length across the three penguin species. I am going to use the lmtest() package for this. This will fit a simple linear model to the data.
 
-```{r fitting.a.linear.model.to.the.data}
+```{r Fitting.a.linear.model.to.the.data}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
 #First I must fit a linear model of the effect of body mass on flipper length. 
 effect.of.body.mass.on.flipper.length <- lm(flipper_length_mm ~ body_mass_g, data = penguins_clean)
@@ -132,7 +131,7 @@ Table.1
 
 ###### Table.1. shows the simple linear model between body mass and flipper length.
 
-```{r checking.the.assumptions.of.the.ANOVA}
+```{r Checking.the.assumptions.of.the.ANOVA}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
 par(mfrow=c(2,2))
 #The plot below shows the linear model residual plots and QQ plots, and shows that the ANOVA assumptions are met.
@@ -147,12 +146,12 @@ Fig. 2 shows that there is low hetroskedascity, as the lines are flat on both th
 
 Having established that the assumptions of the ANOVA test are met, we can run an ANOVA using the lmtest(package).
 
-```{r running.an.anova}
+```{r Running.an.anova}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
 #The code below runs an ANOVA test on the linear model made above, and then saves the results table as a png. 
 #I have generated the ANOVA table for completeness, but to tidy it up I have generated a table in the document as well. 
 Table.2 <- anova(effect.of.body.mass.on.flipper.length)
-#Again the code below only works if you have this exact file route, to save the png to your own pc the file routing will have to be changed. 
+#Again the code below only works if you have this exact file route, to save the png to your own pc the file path will have to be changed. 
 png(filename="C:/Reproducible_figures/Figures/ANOVA_for_Flipper_and_body_mass.png")
 plot(Table.2)
 dev.off()
@@ -168,7 +167,7 @@ Table.2
 
 As Table.2 demonstrates there is a strong correlation between body mass and flipper length, with a statistically significant correlation between body mass and flipper length (p= 2.2x10^-16^, ANOVA). However, this is a correlation across three different species, so it is important to check if species has an effect, and that the species and body mass effect do not interact strongly. For this we need an ANCOVA, which is shown below.
 
-```{r running.an.ANCOVA}
+```{r Running.an.ANCOVA}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
 #What about an ANCOVA? The code below investigates the interaction between body mass and species on flipper length. 
 effect.of.body.mass.and.species <- lm(flipper_length_mm ~ body_mass_g*species, data = penguins_clean)
@@ -186,7 +185,7 @@ As Table.3 shows, there is a weak interaction between species and body mass on f
 
 ### Results and Discussion.
 
-This study showed that there is a statistically significant correlation between body mass and flipper length in the three species of penguins (Adelie, Gentoo, and Chinstrap) in the Palmer's penguin data set (p= 2.2x10^-16^, ANOVA). Furthermore, this study illustrated that there is a strong effect of species on flipper length, but species and body mass do not strongly interact (p= 0.01478, ANCOVA), whilst this is a significant result, it is less strong than the other effects, this shows that there is some level of species specific correlation between body mass and flipper length, which we would expect from the exploratory plot in Fig.1, and from different physiologies within different species of penguins. 
+This study showed that there is a statistically significant correlation between body mass and flipper length in the three species of penguins (Adelie, Gentoo, and Chinstrap) in the Palmer's penguin data set (p= 2.2x10^-16^, ANOVA). Furthermore, this study illustrated that there is a strong effect of species on flipper length, but species and body mass do not strongly interact (p= 0.01478, ANCOVA), whilst this is a significant result, it is less strong than the other effects, this shows that there is some level of species specific correlation between body mass and flipper length, which we would expect from the exploratory plot in Fig.1, and from different physiologies within different species of penguins.
 
 This result could be used to form a mathematical model estimate penguin mass from flipper length, which could be useful in the field in species which are difficult to weigh (for example in Emperor penguins, which are large enough to require incredibly bulky weighing equipment, with limited portability). If a model could be established for quickly recording an estimate of body mass it could have conservation implications (such as getting a general indication of the health of a population), however, a problem with using flipper length as a proxy for body mass is that there is a non-negligible amount of variability within the correlation as shown in Fig.1. Future research could focus on studying more penguin species to confirm that this is a trend seen across species (as the species studied in this analysis are all in the same genus, and are fairly closely related), as well as investigating whether the relationship between body mass and flipper length is general, or strongly species specific, which this study touched upon, however, a larger species pool would be beneficial for that.
 
@@ -194,12 +193,11 @@ This result could be used to form a mathematical model estimate penguin mass fro
 
 In conclusion, this study investigated the possible correlation between body mass and flipper length across three species of penguin found in the Palmer's penguin data set, finding that there is a strong correlation between body mass and flipper length, and a strong correlation between species and flipper length. This study also found that there was a weaker, but still statistically significant, interaction between the effect of body mass on flipper length and the species of penguin, suggesting that there may be species specific trends. This study formed and analysed a linear model using the lmtest() package.
 
-### Bibliography. 
+### Bibliography.
 
-[Kingsolver JG, Huey RB. Size, temperature, and fitness: three rules. *Evol Ecol Res.*  2008;10:251–68.](https://scholar.google.com/scholar_lookup?&title=Size%2C%20temperature%2C%20and%20fitness%3A%20three%20rules&journal=Evol%20Ecol%20Res&volume=10&pages=251-268&publication_year=2008&author=Kingsolver%2CJG&author=Huey%2CRB)
+[Kingsolver JG, Huey RB. Size, temperature, and fitness: three rules. *Evol Ecol Res.* 2008;10:251–68.](https://scholar.google.com/scholar_lookup?&title=Size%2C%20temperature%2C%20and%20fitness%3A%20three%20rules&journal=Evol%20Ecol%20Res&volume=10&pages=251-268&publication_year=2008&author=Kingsolver%2CJG&author=Huey%2CRB)
 
 [Sun, Y., Li, M., Song, G. et al. The role of climate factors in geographic variation in body mass and wing length in a passerine bird. *Avian Res* 8, 1 (2017).](https://doi.org/10.1186/s40657-016-0059-9)
-
 
 ## Question 3: Open Science.
 
@@ -207,10 +205,38 @@ In conclusion, this study investigated the possible correlation between body mas
 
 GitHub link: [My Git Hub Repository](https://github.com/Tsavoboi/Homework_For_Palmers_Penguins)
 
+(Also written in plain text just in case the hyperlink above doesn't work: https://github.com/Tsavoboi/Homework_For_Palmers_Penguins)
+
 #### b) Partner's Github.
 
-Partner's GitHub link: 
+Partner's GitHub link: [My partner's GitHub Repository](Link pending)
 
 #### c) Reflection on my partner's code.
 
+Overall, my partner’s code ran well, was easy to follow, and comprehensive. Whilst a few sections required additional file creation, or the use of a function saved externally to the .Rmd file, the majority ran smoothly within the .Rmd file itself.
+
+##### What elements of your partner's code helped you to understand their data pipeline?
+
+Firstly, the inclusion of many notes throughout the code using the \# symbol made understanding my partner’s code easier. Brief descriptions of each package made it possible to grasp the utility of each package. Saving the data sets with the here function meant that the data saved initially to a data file within the R- project I opened it in (although this only ran without hitch as I had already created a “data” file in the R-project, if it hadn’t existed it would’ve required making an extra folder). Using underscores when naming plots and data-sets also increased the flow of the code. The use of piping was beneficial, as it prevented overwriting of the data sets.
+
+##### Did it run? Did you need to fix anything? 
+
+My partners’ code didn’t run on the first attempt, as I had not downloaded the function they had made to clean the data. Once I had downloaded the function from their GitHub, which was an easy process, and ensured all necessary packages had been installed (I had to install two packages), the code ran through without any issues. 
+
+##### What suggestions would you make for improving their code to make it more understandable or reproducible, and why?
+
+To increase the reproducibility of the code, it may be useful to include the code for cleaning the data outside of the function/within the .Rmd file, as whilst the function does increase the ability to clean multiple data-sets, it is stored outside of the .Rmd file, and as such, it may cause more confusion/difficulty finding, downloading, and placing the function within the right working directory than just cleaning the code within the file (although this does reduce the ability to analyse other data sets with the same cleaning code, which is a drawback, possibly as a middle ground including the cleaning code in the data, and saving it as a function for future use, but not using the function in this analysis would work). Furthermore, whilst my partner saved the data sets generated to a data file, they didn’t save the figures to an external folder as png files, which might allow for the extraction of figures for evaluation and publication. One last thing that would increase the reproducibility is including text in the .Rmd saying that there is an associated renv file for this analysis, as when looking through the .Rmd file I assumed there was no renv file, which ment I didn't use it to load the right packages. 
+
+##### If you needed to alter your partner's figure using their code, do you think that would be easy or difficult, and why?
+
+I think the alteration of my partners figures would be easy due to the ample comments left within the code explaining what each part of the code did. Furthermore, saving each data-set with clear names, and naming each plot intuitively makes it easier to change any figures.
+
 #### d) Reflection on my own code after feedback from my partner.
+
+##### What improvements did they suggest, and do you agree?
+
+They suggested that I should indent my code when coding figures, which I think is a very valuable insight, and would improve the readability of my code. It is a suggestion I will implement going forward. Furthermore, this would allow me to comment on specifics in my code, as opposed to putting all my comments at the top and referencing the function I was using. They also suggested that I should have everything within a self-contained .Rmd file, as opposed to saving figures to specific file paths/ having a separate data set. I also think this is a valuable insight. Lastly, they suggested I change the colour of the data points in Fig.1, as opposed to connecting them with a line to denote different species, which I believe is a sensible suggestion. 
+
+##### What did you learn about writing code for other people?
+
+I learnt that when writing code for other people it is vital that all the code within your document can be run without external files or data sets, that it is important for the code to be self contained. Furthermore, I learnt that it is important to properly annotate your code, so that other people, and your future self, can understand what each part of the code is supposed to do. I learnt that I should indent my code when making figures to make it easier to read in the .Rmd file. This task has informed me of the importance of the renv package to document the versions of each package used, and the importance and ease with which code can be shared via GitHub. I also learnt how the portrayal of data can mislead people, and whist a graph can be technically correct, how it can be changed to display data within a way which is misleading and uninformative to the reader. Lastly, this project has taught me how to format within an .Rmd file in a way that increases the readability of the document, setting warnings and messages to not appear after the code, changing title sizes, adding hyperlinks within the document, and adding tables to make the results easier to understand. 
