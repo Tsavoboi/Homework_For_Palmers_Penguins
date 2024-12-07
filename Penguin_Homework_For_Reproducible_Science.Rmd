@@ -40,7 +40,7 @@ Question one required a plot which poorly expressed the data. I have used the ra
 
 ```{r Making.A.Bad.Graph}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
-#The head function is used to show me the first few lines of the dataset, which allowed me to find specific columns of data to represent graphically. 
+#The head function is used to show me the first few lines of the data-set, which allowed me to find specific columns of data to represent graphically. 
 head(penguins_raw)
 #ggplot() is used to plot the graph. geom_bar() tells the code a bar-graph is required, within this function, width changes the width of the bars, and colour changes the outline.  
 #The theme() function added italic blue figure legends
