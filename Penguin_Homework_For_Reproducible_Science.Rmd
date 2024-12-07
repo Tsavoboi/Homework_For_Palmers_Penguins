@@ -22,12 +22,12 @@ First for this homework I installed and loaded the packages required, the instal
 
 #The library function is used to load the packages important for this analysis. 
 library(tidyverse)
-library(palmerpenguins) #This includes our data  set. 
+library(palmerpenguins) #This includes our data set. 
 library(janitor)
 library(here)
 library(ggplot2)
 library(tinytex)
-library(lmtest)
+library(lmtest)#This was used to run linear models. 
 library(renv) #the renv:: commands below were run in the console when they were needed.The renv package saves a record of the packages this study uses, and the version of those packages, to increase the reproducibility of my results.  
 #renv::init()
 #renv::snapshot()
@@ -60,7 +60,7 @@ Plot
 
 #### b) Write about how your design choices mislead the reader about the underlying data (200-300 words).
 
-My design choices make the graph very difficult to interpret. The colour scheme is not colour blind friendly, using red, blue and green, and the choice to represent different species via different colour outlines, as opposed to different fill colours makes it difficult to interpret which penguins are found on which islands. A much better way of representing this would be to use different patterns within the bars. Furthermore, by changing the Y axis scale I make it seem that there is less of a difference between the number of penguins on each island (by stretching the y axis up the perceived difference between each island's total species count decreases). The use of a Y scale starting at 120 is also misleading as it allows no numerical data to be elucidated for much of the graph, preventing any comparative information from being extracted. Moreover, the use of italic, small margins, and no title, make understanding the information the graph is trying to convey difficult to ascertain. Lastly, decreasing the widths of each bar, and increasing the length of the y axis, and outlining the entire graph in a broken red line makes the bars even more difficult to interpret successfully.
+My design choices make the graph very difficult to interpret. The colour scheme is not colour blind friendly, using red, blue and green, and the choice to represent different species via different colour outlines, as opposed to different fill colours makes it difficult to interpret which penguins are found on which islands. A much better way of representing this would be to use different patterns within the bars. Furthermore, by changing the Y axis scale I make it seem that there is less of a difference between the number of penguins on each island (by stretching the y axis up the perceived difference between each island's total species count decreases). The use of a Y scale starting at 120 is also misleading as it allows no numerical data to be elucidated for much of the graph, preventing any comparative information from being extracted. Moreover, the use of italic, small margins, and no title, make understanding the information the graph is trying to convey difficult to ascertain. Lastly, decreasing the widths of each bar, and increasing the length of the y axis, and outlining the entire graph in a broken red line makes the bars even more difficult to interpret successfully. 
 
 ## Question 2: Data pipeline.
 
@@ -68,9 +68,9 @@ My design choices make the graph very difficult to interpret. The colour scheme 
 
 This question requires me to load, clean, graphically explore, and then statistically test the data in the Palmer's penguin data set. The first part of this is loading the data, which is shown below.
 
-The question I am exploring is whether Body mass and flipper length are correlated. My alternative hypothesis is that flipper length and body mass are correlated, as I believe body mass may be an accurate proxy for overall body size, and I expect the penguins to increase proportionally, so as the penguin gets bigger, its flippers should get longer. The null hypothesis is that flipper size is not correlated with body mass, possibly because flippers are evolutionary constrained within morphospace, and cannot continue growing with the rest of the body, or possibly after some amount of growth any other increase in body mass is placed in specific tissues, such as fat deposits, and doesn't correspond to a proportional increase in body dimensions.
+The question I am exploring is whether Body mass and flipper length are correlated (and whether species has any effect on this correlation). My alternative hypothesis is that flipper length and body mass are correlated, as I believe body mass may be an accurate proxy for overall body size, and I expect the penguins to increase proportionally, so as the penguin gets bigger, its flippers should get longer. The null hypothesis is that flipper size is not correlated with body mass, possibly because flippers are evolutionary constrained within morphospace, and cannot continue growing with the rest of the body, or possibly after some amount of growth any other increase in body mass is placed in specific tissues, such as fat deposits, and doesn't correspond to a proportional increase in body dimensions. There is also likely to be species specific differences in this correlation, due to different ecologies and life history traits. 
 
-I have chosen to investigate whether there is a correlation between body mass and flipper length, as if there is a strong correlation, then possibly a model could be made to predict body mass from flipper length, which is likely an easier measure to take in the field, which would enhance data collection, and conservation methods by streamlining body mass estimates.
+I have chosen to investigate whether there is a correlation between body mass and flipper length, as if there is a strong correlation, then possibly a model could be made to predict body mass from flipper length, which is likely an easier measure to take in the field, which would enhance data collection, and conservation methods by streamlining body mass estimates. Both wing length (in our case flippers) and body mass are used as proxies for body size (Sun et al., 2017), and the estimation of body size is probably one of the most important trait influencing the ecology and physiology of animals (Kingsolver and Huey, 2008), therefore, understanding how body size and flipper length correlate with one another could be a highly useful within the further study of the three penguin species included within the Palmer's penguin data set.The Palmer's penguin data set focuses on three species of penguin, Adelie, Chinstrap and Gentoo penguins (*Pygoscelis adeliae, P. antarctica,* and *P. papua* respectively.)
 
 ### Cleaning the data.
 
@@ -192,6 +192,14 @@ This result could be used to form a mathematical model estimate penguin mass fro
 ### Conclusion.
 
 In conclusion, this study investigated the possible correlation between body mass and flipper length across three species of penguin found in the Palmer's penguin data set, finding that there is a strong correlation between body mass and flipper length, and a strong correlation between species and flipper length. This study also found that there was a weaker, but still statistically significant, interaction between the effect of body mass on flipper length and the species of penguin, suggesting that there may be species specific trends. This study formed and analysed a linear model using the lmtest() package.
+
+### Bibliography. 
+
+[Kingsolver JG, Huey RB. Size, temperature, and fitness: three rules. *Evol Ecol Res.*  2008;10:251–68.](https://scholar.google.com/scholar_lookup?&title=Size%2C%20temperature%2C%20and%20fitness%3A%20three%20rules&journal=Evol%20Ecol%20Res&volume=10&pages=251-268&publication_year=2008&author=Kingsolver%2CJG&author=Huey%2CRB)
+
+[Sun, Y., Li, M., Song, G. et al. The role of climate factors in geographic variation in body mass and wing length in a passerine bird. *Avian Res* 8, 1 (2017).](https://doi.org/10.1186/s40657-016-0059-9)
+
+
 
 ## Question 3: Open Science.
 
