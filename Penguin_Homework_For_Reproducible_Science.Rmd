@@ -151,6 +151,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 #The code below runs an ANOVA test on the linear model made above, and then saves the results table as a png. 
 #I have generated the ANOVA table for completeness, but to tidy it up I have generated a table in the document as well. 
 Table.2 <- anova(effect.of.body.mass.on.flipper.length)
+#Again the code below only works if you have this exact file route, to save the png to your own pc the file routing will have to be changed. 
 png(filename="C:/Reproducible_figures/Figures/ANOVA_for_Flipper_and_body_mass.png")
 plot(Table.2)
 dev.off()
