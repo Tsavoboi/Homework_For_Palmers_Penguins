@@ -1,1 +1,1 @@
-Hello, I have attached an R project here, as well as the Rmd file containing my code for question 2 for the Reproducible figures homework assignment. There is also a renv file which can help to make sure the right packages loaded for this project. 
+Hello, I have attached an R project here, as well as the Rmd file containing my code for question 2 for the Reproducible figures homework assignment. There is also a renv file which can help to make sure the right packages loaded for this project, and a data and figures file containing the results of my assignment. 
