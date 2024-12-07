@@ -14,11 +14,12 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE) #This code sets warning 
 
 # Homework
 
-## Question 1: Data Visualisation for Science Communication
+## Question 1: Data Visualisation for Scienceren Communication
 
-First for this homework I installed and loaded the packages required, the installation was done in the console for cleaner code.
+First for this homework I installed and loaded the packages required, the installation was done in the console for cleaner code, the packages needed are shown below, and stored in the renv file for this coding assignment.
 
 ```{r loading.the.packages}
+
 #The library function is used to load the packages important for this analysis. 
 library(tidyverse)
 library(palmerpenguins) #This includes our data  set. 
@@ -31,7 +32,6 @@ library(renv) #the renv:: commands below were run in the console when they were 
 #renv::init()
 #renv::snapshot()
 #renv::restore ()
-#please when attempting to run this code start with renv::restore in the console to ensure the required packages are loaded. 
 ```
 
 ### Making a poor graph.
@@ -82,8 +82,9 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 #The data I am exploring is in the Palmer's penguins package.
 head(penguins_raw) #This is my raw data set. 
 #The first step in my analysis is cleaning the data. 
+penguins_original <- penguins_raw
 colnames(penguins_raw) #these column names need cleaning, there are gaps, and sporadic capitalisation. 
-write.csv (penguins_raw, here("data","penguins_raw.csv")) #This saves the data to a file called data, saved in the same R project as this rmd file. If re-running this code, a file named data will be necessary in the same working directory.  
+write.csv (penguins_raw, here("data","penguins_raw.csv")) #This saves the data to a data folder in the same project as this Rmd file. 
 #The piping below removes the comments and Delta columns, cleans the data, removing capitals, full stops, brackets, removing N/A readings and renaming the species columns. 
 penguins_clean <- penguins_raw %>% 
               select(-Comments) %>% 
@@ -104,14 +105,14 @@ Now I will make an exploratory figure with my clean data. This will give me an i
 ```{r Creating.an.exploratory.figure}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
 #I have used ggplot2 for this figure, adding a line graph with geom_line, the raw data points with geom_jitter, and a linear regression using the geom_smooth function. Furthermore, I have grouped the data by species. 
-Fig.1 <- ggplot(data = penguins_clean, aes(group = species,x = body_mass_g, y = flipper_length_mm, color = species)) + geom_line() + theme_bw() + labs(x = 'Body Mass (g)', y = 'Flipper Length (mm)', title ='Does body mass correlate with flipper length?') + geom_jitter(position = position_jitter(0.5), color = "black", size = 0.5, alpha = 0.9, pch = 21) + geom_smooth(method=lm)
+Fig.1 <- ggplot(data = penguins_clean, aes(group = species,x = body_mass_g, y = flipper_length_mm, color = species)) + geom_line() + theme_bw() + labs(x = 'Body Mass (g)', y = 'Flipper Length (mm)', title ='Does body mass correlate with flipper length?') + geom_jitter(position = position_jitter(0.5), color = "black", size = 0.8, alpha = 0.9, pch = 21) + geom_smooth(method=lm) + scale_color_manual(values=c("#79CDCD", "#FF7256","#53868B"))
 
 
 #The code below saved the figure to my project file for this project, as a png. 
-png(filename="C:/Reproducible_figures/Figures/Flipper_and_body_mass.png") #This code saves the file as a png on my computer, the file route will have to be changed to run it on another computer, to your own figure file. 
+#The code below will require a change to route the figure to a specific file if running this on a different computer. 
+png(filename="C:/Reproducible_figures/Figures/Flipper_and_body_mass.png")
 plot(Fig.1)
 dev.off()
-
 Fig.1
 ```
 
@@ -150,7 +151,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 #The code below runs an ANOVA test on the linear model made above, and then saves the results table as a png. 
 #I have generated the ANOVA table for completeness, but to tidy it up I have generated a table in the document as well. 
 Table.2 <- anova(effect.of.body.mass.on.flipper.length)
-png(filename="C:/Reproducible_figures/Figures/ANOVA_for_Flipper_and_body_mass.png") #Again this only works if you have this exact file route, to save the png to your own pc the file routing will have to be changed. 
+png(filename="C:/Reproducible_figures/Figures/ANOVA_for_Flipper_and_body_mass.png")
 plot(Table.2)
 dev.off()
 Table.2
@@ -195,9 +196,7 @@ In conclusion, this study investigated the possible correlation between body mas
 
 #### a) My GitHub.
 
-GitHub link:
-
-[My Git Hub Repository](https://github.com/Tsavoboi/Homework_For_Palmers_Penguins)
+GitHub link: [My Git Hub Repository](https://github.com/Tsavoboi/Homework_For_Palmers_Penguins)
 
 #### b) Partner's Github.
 
