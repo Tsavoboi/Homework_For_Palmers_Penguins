@@ -137,6 +137,9 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 par(mfrow=c(2,2))
 #The plot below shows the linear model residual plots and QQ plots, and shows that the ANOVA assumptions are met.
 Fig.2 <- plot(effect.of.body.mass.on.flipper.length)
+png(filename="C:/Reproducible_figures/Figures/Residuals.png")
+plot(Fig.2)
+dev.off()
 Fig.2
 ```
 
