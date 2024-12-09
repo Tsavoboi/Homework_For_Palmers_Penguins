@@ -159,7 +159,7 @@ Table.2
 ```
 
 |           | Degrees of Freedom | Sum of squares | Mean squares | F value |   P value   |
-|:----------:|:----------:|:----------:|:----------:|:----------:|:----------:|
+|:---------:|:------------------:|:--------------:|:------------:|:-------:|:-----------:|
 | Body Mass |         1          |     49703      |    49703     | 1060.3  | 2.2x10^-16^ |
 | Residuals |        331         |     15516      |      47      |         |             |
 
@@ -209,7 +209,9 @@ GitHub link: [My Git Hub Repository](https://github.com/Tsavoboi/Homework_For_Pa
 
 #### b) Partner's Github.
 
-Partner's GitHub link: [My partner's GitHub Repository](Link pending)
+Partner's GitHub link: [My partner's GitHub Repository](https://github.com/Biology5785/PenguinAssessmentProject)
+
+(Also written in plain text just in case the hyperlink above doesn't work: https://github.com/Biology5785/PenguinAssessmentProject)
 
 #### c) Reflection on my partner's code.
 
@@ -219,13 +221,13 @@ Overall, my partner’s code ran well, was easy to follow, and comprehensive. Wh
 
 Firstly, the inclusion of many notes throughout the code using the \# symbol made understanding my partner’s code easier. Brief descriptions of each package made it possible to grasp the utility of each package. Saving the data sets with the here function meant that the data saved initially to a data file within the R- project I opened it in (although this only ran without hitch as I had already created a “data” file in the R-project, if it hadn’t existed it would’ve required making an extra folder). Using underscores when naming plots and data-sets also increased the flow of the code. The use of piping was beneficial, as it prevented overwriting of the data sets.
 
-##### Did it run? Did you need to fix anything? 
+##### Did it run? Did you need to fix anything?
 
-My partners’ code didn’t run on the first attempt, as I had not downloaded the function they had made to clean the data. Once I had downloaded the function from their GitHub, which was an easy process, and ensured all necessary packages had been installed (I had to install two packages), the code ran through without any issues. 
+My partners’ code didn’t run on the first attempt, as I had not downloaded the function they had made to clean the data. Once I had downloaded the function from their GitHub, which was an easy process, and ensured all necessary packages had been installed (I had to install two packages), the code ran through without any issues.
 
 ##### What suggestions would you make for improving their code to make it more understandable or reproducible, and why?
 
-To increase the reproducibility of the code, it may be useful to include the code for cleaning the data outside of the function/within the .Rmd file, as whilst the function does increase the ability to clean multiple data-sets, it is stored outside of the .Rmd file, and as such, it may cause more confusion/difficulty finding, downloading, and placing the function within the right working directory than just cleaning the code within the file (although this does reduce the ability to analyse other data sets with the same cleaning code, which is a drawback, possibly as a middle ground including the cleaning code in the data, and saving it as a function for future use, but not using the function in this analysis would work). Furthermore, whilst my partner saved the data sets generated to a data file, they didn’t save the figures to an external folder as png files, which might allow for the extraction of figures for evaluation and publication. One last thing that would increase the reproducibility is including text in the .Rmd saying that there is an associated renv file for this analysis, as when looking through the .Rmd file I assumed there was no renv file, which ment I didn't use it to load the right packages. 
+To increase the reproducibility of the code, it may be useful to include the code for cleaning the data outside of the function/within the .Rmd file, as whilst the function does increase the ability to clean multiple data-sets, it is stored outside of the .Rmd file, and as such, it may cause more confusion/difficulty finding, downloading, and placing the function within the right working directory than just cleaning the code within the file (although this does reduce the ability to analyse other data sets with the same cleaning code, which is a drawback, possibly as a middle ground including the cleaning code in the data, and saving it as a function for future use, but not using the function in this analysis would work). Furthermore, whilst my partner saved the data sets generated to a data file, they didn’t save the figures to an external folder as png files, which might allow for the extraction of figures for evaluation and publication. One last thing that would increase the reproducibility is including text in the .Rmd saying that there is an associated renv file for this analysis, as when looking through the .Rmd file I assumed there was no renv file, which ment I didn't use it to load the right packages.
 
 ##### If you needed to alter your partner's figure using their code, do you think that would be easy or difficult, and why?
 
@@ -235,8 +237,8 @@ I think the alteration of my partners figures would be easy due to the ample com
 
 ##### What improvements did they suggest, and do you agree?
 
-They suggested that I should indent my code when coding figures, which I think is a very valuable insight, and would improve the readability of my code. It is a suggestion I will implement going forward. Furthermore, this would allow me to comment on specifics in my code, as opposed to putting all my comments at the top and referencing the function I was using. They also suggested that I should have everything within a self-contained .Rmd file, as opposed to saving figures to specific file paths/ having a separate data set. I also think this is a valuable insight. Lastly, they suggested I change the colour of the data points in Fig.1, as opposed to connecting them with a line to denote different species, which I believe is a sensible suggestion. 
+They suggested that I should indent my code when coding figures, which I think is a very valuable insight, and would improve the readability of my code. It is a suggestion I will implement going forward. Furthermore, this would allow me to comment on specifics in my code, as opposed to putting all my comments at the top and referencing the function I was using. They also suggested that I should have everything within a self-contained .Rmd file, as opposed to saving figures to specific file paths/ having a separate data set. I also think this is a valuable insight. Lastly, they suggested I change the colour of the data points in Fig.1, as opposed to connecting them with a line to denote different species, which I believe is a sensible suggestion.
 
 ##### What did you learn about writing code for other people?
 
-I learnt that when writing code for other people it is vital that all the code within your document can be run without external files or data sets, that it is important for the code to be self contained. Furthermore, I learnt that it is important to properly annotate your code, so that other people, and your future self, can understand what each part of the code is supposed to do. I learnt that I should indent my code when making figures to make it easier to read in the .Rmd file. This task has informed me of the importance of the renv package to document the versions of each package used, and the importance and ease with which code can be shared via GitHub. I also learnt how the portrayal of data can mislead people, and whist a graph can be technically correct, how it can be changed to display data within a way which is misleading and uninformative to the reader. Lastly, this project has taught me how to format within an .Rmd file in a way that increases the readability of the document, setting warnings and messages to not appear after the code, changing title sizes, adding hyperlinks within the document, and adding tables to make the results easier to understand. 
+I learnt that when writing code for other people it is vital that all the code within your document can be run without external files or data sets, that it is important for the code to be self contained. Furthermore, I learnt that it is important to properly annotate your code, so that other people, and your future self, can understand what each part of the code is supposed to do. I learnt that I should indent my code when making figures to make it easier to read in the .Rmd file. This task has informed me of the importance of the renv package to document the versions of each package used, and the importance and ease with which code can be shared via GitHub. I also learnt how the portrayal of data can mislead people, and whist a graph can be technically correct, how it can be changed to display data within a way which is misleading and uninformative to the reader. Lastly, this project has taught me how to format within an .Rmd file in a way that increases the readability of the document, setting warnings and messages to not appear after the code, changing title sizes, adding hyperlinks within the document, and adding tables to make the results easier to understand.
